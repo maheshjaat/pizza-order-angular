@@ -1,0 +1,83 @@
+<div class="flex flex-wrap" *ngFor="let pizza of pizza">
+  <div class="bg-green-700 m-4 justify-center flex-col">
+    <h1>Veg Pizza</h1>
+  </div>
+  <div class="bg-white-200" *ngFor="let veg of pizza.veg">
+    <div class="p-4 max-w-sm rounded overflow-hidden shadow-lg">
+      <img
+        class="w-full h-100"
+        src="{{ veg.imgUrl }}"
+        alt="Sunset in the mountains"
+      />
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">{{ veg.name }}</div>
+        <p class="text-gray-700 text-base">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
+          quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
+          nihil.
+        </p>
+      </div>
+      <div class="px-6 pt-4 pb-2">
+        <label class="bg-gray-100">Size</label>
+        <select
+          class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
+        >
+          <option *ngFor="let size of veg.size">
+            {{ size.size | uppercase }}
+            <span class="text-lime-400">{{ size.price }}</span>
+          </option>
+        </select>
+        <label class="bg-gray-100">Crust</label>
+        <select
+          class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >
+          <option *ngFor="let crust of crust">{{ crust }}</option>
+        </select>
+        <!-- <select
+          *ngFor="let tops of toppings"
+          class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >
+          <option *ngFor="let vegTop of tops.veg">{{ vegTop.name }}</option>
+        </select> -->
+      </div>
+    </div>
+  </div>
+  <hr />
+  <!-- <div class="bg-red-200" *ngFor="let veg of pizza.nonVeg">
+    <div class="flex flex-col items-stretch mt-4 justify-start">
+      <h1>{{ veg.id }}</h1>
+      <h1>{{ veg.name }}</h1>
+      <img src="{{ veg.imgUrl }}" alt="{{ veg.imgUrl }}" />
+    </div>
+  </div> -->
+
+  <!-- <div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <img
+      class="w-full"
+      src="https://images.dominos.co.in/Corn.jpg"
+      alt="Sunset in the mountains"
+    />
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+      <p class="text-gray-700 text-base">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
+        quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
+        nihil.
+      </p>
+    </div>
+    <div class="px-6 pt-4 pb-2">
+      <span
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >#photography</span
+      >
+      <span
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >#travel</span
+      >
+      <span
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >#winter</span
+      >
+    </div>
+  </div> -->
+</div>
