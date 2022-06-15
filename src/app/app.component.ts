@@ -47,26 +47,34 @@ export class AppComponent {
         {
           id: 11,
           name: 'Non-Veg Supreme',
-          imgUrl: 'DEl',
-          reg: 190,
-          med: 325,
-          lag: 425,
+          imgUrl: 'https://images.dominos.co.in/new_non_veg_supreme.jpg',
+
+          size: [
+            { size: 'regular', price: 190 },
+            { size: 'medium', price: 325 },
+            { size: 'large', price: 425 },
+          ],
         },
         {
           id: 12,
           name: 'Checken Tikka',
-          imgUrl: 'DEl',
-          reg: 210,
-          med: 370,
-          lag: 500,
+          imgUrl: 'https://images.dominos.co.in/new_chicken_fiesta.jpg',
+          size: [
+            { size: 'regular', price: 210 },
+            { size: 'medium', price: 370 },
+            { size: 'large', price: 500 },
+          ],
         },
         {
           id: 13,
           name: 'Pepper Barbecue Chicken',
-          imgUrl: 'DEl',
-          reg: 220,
-          med: 380,
-          lag: 525,
+          imgUrl:
+            'https://images.dominos.co.in/new_pepper_barbeque_chicken.jpg',
+          size: [
+            { size: 'regular', price: 220 },
+            { size: 'medium', price: 380 },
+            { size: 'large', price: 525 },
+          ],
         },
       ],
     },
@@ -98,4 +106,8 @@ export class AppComponent {
     { id: 102, name: 'Mousse cake', price: 90 },
   ];
   constructor() {}
+
+  customisePizza(data: any) {
+    console.log(data);
+  }
 }
