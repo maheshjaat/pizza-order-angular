@@ -6,79 +6,92 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  showModal = false;
+  customizeData: any;
+  toggleModal() {
+    this.showModal = !this.showModal;
+  }
   title = 'angtailwind';
-  pizza = [
-    {
-      veg: [
-        {
-          id: 1,
-          name: 'Deluxe Veggie',
-          imgUrl: 'https://images.dominos.co.in/new_deluxe_veggie.jpg',
-          size: [
-            { size: 'regular', price: 150 },
-            { size: 'medium', price: 200 },
-            { size: 'large', price: 325 },
-          ],
-        },
-        {
-          id: 2,
-          name: 'Cheese and corn',
-          imgUrl: 'https://images.dominos.co.in/Corn.jpg',
-          size: [
-            { size: 'regular', price: 175 },
-            { size: 'medium', price: 375 },
-            { size: 'large', price: 475 },
-          ],
-        },
-        {
-          id: 3,
-          name: 'Paneer Tikka',
-          imgUrl: 'https://images.dominos.co.in/Paneer.jpg',
+  price: number = 0;
+  pizza = {
+    veg: [
+      {
+        id: 1,
+        name: 'Deluxe Veggie',
+        imgUrl: 'https://images.dominos.co.in/new_deluxe_veggie.jpg',
+        size: [
+          { size: 'regular', price: 150 },
+          { size: 'medium', price: 200 },
+          { size: 'large', price: 325 },
+        ],
+        price: 150,
 
-          size: [
-            { size: 'regular', price: 160 },
-            { size: 'medium', price: 290 },
-            { size: 'large', price: 340 },
-          ],
-        },
-      ],
+        crust: '',
+      },
+      {
+        id: 2,
+        name: 'Cheese and corn',
+        imgUrl: 'https://images.dominos.co.in/Corn.jpg',
+        size: [
+          { size: 'regular', price: 175 },
+          { size: 'medium', price: 375 },
+          { size: 'large', price: 475 },
+        ],
+        price: 175,
+        crust: '',
+      },
+      {
+        id: 3,
+        name: 'Paneer Tikka',
+        imgUrl: 'https://images.dominos.co.in/Paneer.jpg',
 
-      nonVeg: [
-        {
-          id: 11,
-          name: 'Non-Veg Supreme',
-          imgUrl: 'https://images.dominos.co.in/new_non_veg_supreme.jpg',
+        size: [
+          { size: 'regular', price: 160 },
+          { size: 'medium', price: 290 },
+          { size: 'large', price: 340 },
+        ],
+        price: 160,
+        crust: '',
+      },
+    ],
 
-          size: [
-            { size: 'regular', price: 190 },
-            { size: 'medium', price: 325 },
-            { size: 'large', price: 425 },
-          ],
-        },
-        {
-          id: 12,
-          name: 'Checken Tikka',
-          imgUrl: 'https://images.dominos.co.in/new_chicken_fiesta.jpg',
-          size: [
-            { size: 'regular', price: 210 },
-            { size: 'medium', price: 370 },
-            { size: 'large', price: 500 },
-          ],
-        },
-        {
-          id: 13,
-          name: 'Pepper Barbecue Chicken',
-          imgUrl:
-            'https://images.dominos.co.in/new_pepper_barbeque_chicken.jpg',
-          size: [
-            { size: 'regular', price: 220 },
-            { size: 'medium', price: 380 },
-            { size: 'large', price: 525 },
-          ],
-        },
-      ],
-    },
-  ];
+    nonVeg: [
+      {
+        id: 11,
+        name: 'Non-Veg Supreme',
+        imgUrl: 'https://images.dominos.co.in/new_non_veg_supreme.jpg',
+
+        size: [
+          { size: 'regular', price: 190 },
+          { size: 'medium', price: 325 },
+          { size: 'large', price: 425 },
+        ],
+        crust: '',
+      },
+      {
+        id: 12,
+        name: 'Checken Tikka',
+        imgUrl: 'https://images.dominos.co.in/new_chicken_fiesta.jpg',
+        size: [
+          { size: 'regular', price: 210 },
+          { size: 'medium', price: 370 },
+          { size: 'large', price: 500 },
+        ],
+        crust: '',
+      },
+      {
+        id: 13,
+        name: 'Pepper Barbecue Chicken',
+        imgUrl: 'https://images.dominos.co.in/new_pepper_barbeque_chicken.jpg',
+        size: [
+          { size: 'regular', price: 220 },
+          { size: 'medium', price: 380 },
+          { size: 'large', price: 525 },
+        ],
+      },
+    ],
+  };
+
   crust = [
     'New hand tossed',
     'Wheat thin crust',
@@ -108,6 +121,21 @@ export class AppComponent {
   constructor() {}
 
   customisePizza(data: any) {
+    this.showModal = !this.showModal;
+    this.customizeData = data;
     console.log(data);
   }
+  getPizzaPrice(event: any, veg: any) {
+    this.pizza.veg[veg.id - 1]['price'] = event.target.value;
+    console.log('price', event.target.value, veg);
+  }
+  getCrustType(event: any, veg: any) {
+    // this.pizza.veg[veg.id - 1] = {
+    //   ...this.pizza.veg[veg.id - 1],
+    //   : event.target.value,
+    // };
+    this.pizza.veg[veg.id - 1].crust = event.target.value;
+  }
+
+  ngOninit() {}
 }
