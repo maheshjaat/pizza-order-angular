@@ -157,7 +157,7 @@
           <div class="width-5">
             <input
               type="checkbox"
-              value="add extra cheess"
+              value="35"
               (change)="addExtraCheese($event, nonv)"
             /><label class="bg-white-100"> &#8377; 35 Extra cheese</label>
           </div>
@@ -232,7 +232,9 @@
 
               <div class="row" *ngIf="vegTop">
                 <label>Veg Tooping </label>
-                <span class="font-light text-sm"> Start From &#8377; 10 </span>
+                <span class="font-bold italic text-sm">
+                  Start From &#8377; 10
+                </span>
                 <div
                   class="bg-gray-200"
                   *ngFor="let vegTopping of toppings.veg"
@@ -256,8 +258,10 @@
                   *ngFor="let nonvTopping of toppings.nonVeg"
                 >
                   <input
-                    type="checkbox"
-                    value="add extra cheess"
+                    name="topping"
+                    type="radio"
+                    id="{{ nonvTopping.id }}"
+                    value="{{ nonvTopping }}"
                     (change)="addTopping($event, nonvTopping)"
                   /><label class="bg-white-100">
                     {{ nonvTopping.name }}
