@@ -17,4 +17,15 @@ export class CommonService {
 
     //return this.http.post<any>('signin', user);
   }
+
+  isLoggedIn() {
+    if (localStorage.getItem('auth_token')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  signOut() {
+    localStorage.removeItem('auth_token');
+  }
 }

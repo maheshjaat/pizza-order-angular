@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-
+import { CommonService } from 'src/app/services/common.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(public cmService: CommonService, public router: Router) {}
+  signOut() {
+    this.router.navigate(['/']);
+    this.cmService.signOut();
+  }
 }
 
 //export class FinalOrder {
