@@ -1,34 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-// interface Final {
-//   id: any;
-//   name: any;
-//   imgUrl: any;
-//   size: any;
-//   pizza_price: number;
-//   topping_price: number;
-//   cheese_price: number;
-//   total_price: number;
-//   extra_cheese: any;
-//   isLargePizza: boolean;
-//   topping_type: any;
-//   crust: any;
-//   addToCart: boolean;
-//   count: number;
-// }
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   showModal: boolean = false;
   toppings: any;
   vegTop: boolean = true;
   nonvTop: boolean = true;
-  customizeData: any;
+  customizeData: any = [];
   customizeTopping: any;
-  finalOrder: any = [];
+  finalOrder = [];
 
   hideme = {};
   toggleModal() {
@@ -56,10 +40,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         extra_cheese: false,
         isLargePizza: false,
         topping_type: [],
-        crust: 'New hand tossed',
+        crust: '',
         addToCart: false,
         count: 0,
-        selectedSize: 'regular',
       },
       {
         id: 2,
@@ -78,10 +61,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         extra_cheese: false,
         isLargePizza: false,
         topping_type: [],
-        crust: 'New hand tossed',
+        crust: '',
         addToCart: false,
         count: 0,
-        selectedSize: 'regular',
       },
       {
         id: 3,
@@ -101,10 +83,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         extra_cheese: false,
         isLargePizza: false,
         topping_type: [],
-        crust: 'New hand tossed',
+        crust: '',
         addToCart: false,
         count: 0,
-        selectedSize: 'regular',
       },
     ],
 
@@ -126,10 +107,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         extra_cheese: false,
         isLargePizza: false,
         topping_type: [],
-        crust: 'New hand tossed',
+        crust: '',
         addToCart: false,
         count: 0,
-        selectedSize: 'regular',
       },
       {
         id: 12,
@@ -147,10 +127,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         extra_cheese: false,
         isLargePizza: false,
         topping_type: [],
-        crust: 'New hand tossed',
+        crust: '',
         addToCart: false,
         count: 0,
-        selectedSize: 'regular',
       },
       {
         id: 13,
@@ -168,10 +147,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         extra_cheese: false,
         isLargePizza: false,
         topping_type: [],
-        crust: 'New hand tossed',
+        crust: '',
         addToCart: false,
         count: 0,
-        selectedSize: 'regular',
       },
     ],
   };
@@ -202,70 +180,73 @@ export class DashboardComponent implements OnInit, OnDestroy {
     { id: 102, name: 'Mousse cake', price: 90 },
   ];
 
-  constructor() {
-    // this.finalOrder = localStorage.getItem('finalOrder');
-    // console.log('ngOn', localStorage.getItem('finalOrder'));
-  }
+  constructor() {}
 
   ngOnInit(): void {}
-  mahesh = this.topping;
+
   customisePizza(data: any, type: string) {
     this.customizeData = [];
     this.showModal = !this.showModal;
     this.customizeData.push(data);
     if (type == 'veg') {
-      this.toppings = this.mahesh;
+      this.toppings = this.topping;
       this.nonvTop = false;
     } else {
-      this.topping.veg.forEach((element: any, index: any) => {
-        console.log(element, index, 'dfj');
-        if (element.name == 'Paneer') this.topping.veg.splice(index, 1);
-      });
+      // this.topping.veg.splice(
+      //   this.topping.veg.findIndex((a) => a.name == 'Paneer'),
+      //   1
+      // );
 
-      console.log('kdjfnsd', this.topping);
-
+      // this.topping.veg.forEach(e => {
+      //   this.hideme[e.id] = false;
+      // });
       this.toppings = this.topping;
 
       this.vegTop = true;
       this.nonvTop = true;
     }
-    console.log(data);
+    console.log('this.customizeData', this.customizeData);
   }
   getPizzaPrice(event: any, veg: any) {
-    veg.pizza_price = parseInt(JSON.parse(event.target.value).price);
-    veg.selectedSize = JSON.parse(event.target.value).size;
+    this.customizeData[0].pizza_price = parseInt(
+      JSON.parse(event.target.value).price
+    );
     if (JSON.parse(event.target.value).size == 'large') {
-      veg.isLargePizza = true;
+      this.customizeData[0].isLargePizza = true;
       alert(
         'With Large Size Pizza You are eligible for 2 topping with no exta cost'
       );
-      console.log('price', JSON.parse(event.target.value), veg);
     }
+    console.log('price', JSON.parse(event.target.value), this.customizeData[0]);
   }
   getCrustType(event: any, pizzatype: any) {
     console.log('CrustCall');
 
     var objIndex;
-    if (pizzatype.id < 10) {
-      objIndex = this.pizza.veg.findIndex((obj) => obj.id == pizzatype.id);
+    if (this.customizeData[0].id < 10) {
+      objIndex = this.pizza.veg.findIndex(
+        (obj) => obj.id == this.customizeData[0].id
+      );
       this.pizza.veg[objIndex].crust = event.target.value;
       console.log('veg', objIndex);
     } else {
-      objIndex = this.pizza.nonVeg.findIndex((obj) => obj.id == pizzatype.id);
+      objIndex = this.pizza.nonVeg.findIndex(
+        (obj) => obj.id == this.customizeData[0].id
+      );
       this.pizza.nonVeg[objIndex].crust = event.target.value;
       console.log('nonveg', objIndex);
     }
 
-    console.log('crust', event, pizzatype);
+    console.log('crust', event, this.customizeData[0]);
   }
 
   addExtraCheese(event: any, data: any) {
     if (event.target.checked === true) {
-      data.extra_cheese = true;
-      data.cheese_price += parseInt(event.target.value);
+      this.customizeData[0].extra_cheese = true;
+      this.customizeData[0].cheese_price += parseInt(event.target.value);
     } else {
-      data.extra_cheese = false;
-      data.cheese_price -= parseInt(event.target.value);
+      this.customizeData[0].extra_cheese = false;
+      this.customizeData[0].cheese_price -= parseInt(event.target.value);
     }
     console.log(data, event);
   }
@@ -275,49 +256,86 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public topping_price_for_large_pizza = 0;
   public topping_type_for_nonveg = [];
   public topping_price_for_non = 0;
-
   addTopping(event: any, customisePizza: any, toppingData: any, type: string) {
     var toppingName = toppingData.name;
     if (type == 'vegTopping') {
       if (this.customizeData[0].isLargePizza == true) {
         console.log('largePizza');
         if (event.target.checked == true) {
+          console.log('topp', event.target.value, this.customizeData[0]);
           this.customizeData[0].topping_type.push(toppingData.name);
 
-          if (this.customizeData[0].topping_type.length > 2) {
+          if (this.topping_type_for_large_pizza.length > 2) {
             this.customizeData[0].topping_price += parseInt(event.target.value);
             this.topping_price_for_large_pizza += parseInt(event.target.value);
           }
-          console.log('tootype', this.customizeData[0].topping_type);
+
+          console.log(
+            'this.customizeData[0].price',
+            this.customizeData[0].topping_price,
+            this.topping_type_for_large_pizza,
+            this.topping_price_for_large_pizza
+          );
         } else {
+          // this.topping_type_for_large_pizza =
+          //   this.topping_type_for_large_pizza.filter(
+          //     (topping_type_for_large_pizza) =>
+          //       topping_type_for_large_pizza !== toppingName
+          //   );
+
           this.customizeData[0].topping_type.forEach(
             (element: any, index: any) => {
-              if (element == toppingName)
-                this.customizeData[0].topping_type.splice(index, 1);
+              if (element == toppingName) this.finalOrder.splice(index, 1);
             }
           );
-          if (this.customizeData[0].topping_type.length >= 2) {
+
+          // this.customizeData[0].topping_type =
+          //   this.topping_type_for_large_pizza;
+
+          if (
+            this.topping_type_for_large_pizza.length >= 2 &&
+            this.topping_price_for_large_pizza !== 0
+          ) {
             this.customizeData[0].topping_price -= parseInt(event.target.value);
             this.topping_price_for_large_pizza -= parseInt(event.target.value);
           }
+
+          console.log(
+            'this.customizeData[0].price',
+            this.customizeData[0].topping_price,
+            this.topping_type_for_large_pizza,
+            this.topping_price_for_large_pizza
+          );
         }
       } else {
         if (event.target.checked == true) {
+          // (this.topping_type as string[]).push(toppingData.name);
+          console.log('topp', event.target.value, this.customizeData[0]);
           this.customizeData[0].topping_price += parseInt(event.target.value);
-
           this.customizeData[0].topping_type.push(toppingData.name);
-          console.log('tootype add', this.customizeData[0].topping_type);
+          //  = this.topping_type;
+          console.log(
+            'this.customizeData[0].price',
+            this.customizeData[0].topping_price,
+            this.topping_type
+          );
         } else {
+          // this.topping_type = this.topping_type.filter(
+          //   (topping_type) => topping_type !== toppingName
+          // );
           this.customizeData[0].topping_type.forEach(
             (element: any, index: any) => {
-              console.log(element, index, 'mahesh');
-
-              if (element == toppingName)
-                this.customizeData[0].topping_type.splice(index, 1);
+              if (element == toppingName) this.finalOrder.splice(index, 1);
             }
           );
           this.customizeData[0].topping_price -= parseInt(event.target.value);
-          console.log('tootype remove', this.customizeData[0].topping_type);
+          // this.customizeData[0].topping_type = this.topping_type;
+
+          console.log(
+            'this.customizeData[0].price',
+            this.customizeData[0].topping_price,
+            this.topping_type
+          );
         }
       }
     } else {
@@ -349,7 +367,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   subTotal = 0;
   obj = {};
   add2Cart(data: any, type: string) {
-    this.showModal = false;
     console.log('data', data, type);
     // var obj = { _id: '', pizzaData: '', count: 0 };
     // var id = 1;
@@ -367,39 +384,39 @@ export class DashboardComponent implements OnInit, OnDestroy {
       data.count -= 1;
       if (data.count == 0) {
         data.addToCart = false;
-        console.log('minus');
-
-        this.finalOrder.forEach((element: any, index: any) => {
-          if (element == data) this.finalOrder.splice(index, 1);
-        });
+        this.finalOrder = this.finalOrder.filter(
+          (finalOrder) => finalOrder !== data
+        );
       }
     }
 
-    // pizza_price: 150,
-    // topping_price: 0,
-    // cheese_price: 0,
-    // total_price: 0,
-    // console.log('sdmsdf', sdfksjd);
+    // if (
+    //   (this.finalOrder = this.finalOrder.filter(
+    //     (finalOrder) => finalOrder !== data
+    //   ))
+    // ) {
+    //   console.log('repeat');
+    // }
+
+    // (this.finalOrder as string[]).push(data);
+    // if (data) {
+    //   console.log("add");
+
+    // } else {
+    //   this.finalOrder = this.finalOrder.filter(
+    //     (finalOrder) => finalOrder == data
+    //   );
+    // }
 
     // for (let i = 0; i < this.finalOrder.length; i++) {
-    //   const element = array[i];
-    // }
-    var subTotalCart: any = [];
-    this.finalOrder.map((item: any) => {
-      subTotalCart.push(
-        (item.pizza_price +
-          item.topping_price +
-          item.cheese_price +
-          item.total_price) *
-          item.count
-      );
-    });
-    this.subTotal = subTotalCart.reduce((pre: any, curr: any) => pre + curr, 0);
+    //   var mahesh=this.finalOrder[i]
 
-    console.log('final', subTotalCart);
+    // }
+
+    console.log('final', this.finalOrder);
   }
 
-  ngOnDestroy() {
-    localStorage.setItem('finalOrder', JSON.stringify(this.finalOrder));
+  changeJson(data: any) {
+    return JSON.parse(data);
   }
 }

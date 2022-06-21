@@ -8,9 +8,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

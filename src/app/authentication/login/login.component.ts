@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  isLoggedIn: any;
   constructor(
     public router: Router,
     public fb: FormBuilder,
@@ -22,6 +23,12 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (localStorage.getItem('auth_token')) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.router.navigate(['/']);
+    }
+
     //send sms form
     this.loginForm = this.fb.group({
       username: [, [Validators.maxLength(10)]],

@@ -24,12 +24,12 @@
 
             <div class="-z-40 float-right">
               <!-- <div
-                  class="text-1xl p-2 group grid"
-                  style="clip-path: inset(0 0 0 0)"
-                >
-                  <div
-                    class="[grid-area:1/1] flex items-center justify-center h-10 w-10 transition ease-in-out group-hover:delay-300 translate-y-10 -translate-x-10 group-hover:translate-y-0 group-hover:translate-x-0"
-                  > -->
+                    class="text-1xl p-2 group grid"
+                    style="clip-path: inset(0 0 0 0)"
+                  >
+                    <div
+                      class="[grid-area:1/1] flex items-center justify-center h-10 w-10 transition ease-in-out group-hover:delay-300 translate-y-10 -translate-x-10 group-hover:translate-y-0 group-hover:translate-x-0"
+                    > -->
               <button
                 type="button"
                 class="bg-transparent text-blue-700 font-semibold py-2 px-4 hover:border-transparent rounded"
@@ -38,12 +38,12 @@
                 Customise ↗
               </button>
               <!-- </div>
-                  <div
-                    class="[grid-area:1/3] flex items-center justify-center h-10 w-10 transition ease-in-out delay-300 group-hover:delay-[0s] duration-300 group-hover:-translate-y-10 group-hover:translate-x-10"
-                  >
-                    
-                  </div>
-                </div> -->
+                    <div
+                      class="[grid-area:1/3] flex items-center justify-center h-10 w-10 transition ease-in-out delay-300 group-hover:delay-[0s] duration-300 group-hover:-translate-y-10 group-hover:translate-x-10"
+                    >
+                      
+                    </div>
+                  </div> -->
             </div>
           </div>
           <div class="px-6 py-10">
@@ -75,7 +75,6 @@
               <label class="bg-gray-300">Crust</label>
               <select
                 class="inline-block bg-white rounded-0 px-3 py-1 text-sm font-semibold text-gray-600 mr-2 mb-2"
-                (change)="getCrustType($event, veg)"
               >
                 <option *ngFor="let crust of crust">{{ crust }}</option>
               </select>
@@ -140,7 +139,7 @@
               class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 hover:border-transparent rounded"
               (click)="customisePizza(nonv, 'nonveg')"
             >
-              Customise ↗
+              Customise
             </button>
           </div>
           <div class="px-6 py-4">
@@ -172,7 +171,6 @@
             <div class="width-5">
               <label class="bg-gray-300">Crust</label>
               <select
-                (change)="getCrustType($event, nonv)"
                 class="inline-block bg-white rounded-0 px-3 py-1 text-sm font-semibold text-gray-600 mr-2 mb-2"
               >
                 <option *ngFor="let crust of crust">{{ crust }}</option>
@@ -216,87 +214,8 @@
     <div class="flex flex-wrap mt-20 mr-2">
       <div class="bg-white-200" *ngIf="finalOrder.length > 0">
         <p class="text-gray-700">Your Cart</p>
-        <div class="flex flex-wrap" *ngFor="let element of finalOrder">
-          <div class="max-w-sm bg-white rounded-lg shadow-md">
-            <a href="#">
-              <img
-                class="p-8 rounded-t-lg"
-                src="{{ element.imgUrl }}"
-                alt="product image"
-              />
-            </a>
-            <div class="px-5 pb-5">
-              <a href="">
-                <h5 class="text-xl font-semibold tracking-tight text-gray-900">
-                  {{ element.name }}
-                </h5>
-              </a>
-              <div class="font-semibold text-gray-400">
-                {{ element.selectedSize | uppercase }} | {{ element.crust }}
-              </div>
-
-              <div
-                class="flex items-center mt-1 mb-1"
-                *ngIf="element.extra_cheese"
-              >
-                <span
-                  class="text-green-600 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
-                  >With</span
-                >
-                <p>Extra cheese</p>
-              </div>
-              <div
-                class="flex items-center mt-1 mb-1"
-                *ngIf="element.topping_type.length > 0"
-              >
-                <span
-                  class="text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
-                  >Your Customisation</span
-                >
-                <p>
-                  Added Toppings:
-                  <span *ngFor="let top of element.topping_type">
-                    {{ top }},
-                  </span>
-                </p>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-3xl font-bold text-gray-900">
-                  &#8377;
-                  {{
-                    (element.pizza_price +
-                      element.topping_price +
-                      element.cheese_price) *
-                      element.count
-                  }}</span
-                >
-                <div class="p-4 max-w-sm rounded">
-                  <div class="-z-40 float-left">
-                    <button
-                      type="button"
-                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                      (click)="add2Cart(element, 'remove')"
-                    >
-                      -
-                    </button>
-                    {{ element.count }}
-                    <button
-                      type="button"
-                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                      (click)="add2Cart(element, 'add')"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <!-- <a
-                  href="#"
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >Add to cart</a
-                > -->
-              </div>
-            </div>
-          </div>
+        <div class="flex flex-wrap" *ngFor="let finalOrder of finalOrder">
+          <h1>{{ finalOrder | json }}</h1>
         </div>
         <div class="w-full mr-3">
           <div
@@ -304,7 +223,7 @@
           >
             <div>
               SubTotal
-              <p class="float-right">{{ subTotal }} &#8377;</p>
+              <p class="float-right">000 &#8377;</p>
             </div>
             <div class="justify-center w-fit align-middle">
               <button
@@ -338,6 +257,37 @@
       </div>
       <hr />
     </div>
+
+    <!-- <div class="flex flex-wrap">
+        <div class="bg-white-200" *ngFor="let data of finalOrder">
+          <div class="p-4 max-w-sm rounded overflow-hidden shadow-lg">
+            <img
+              class="w-full h-100"
+              src="{{ data.imgUrl ? data.imgUrl : 'Na' }}"
+              alt="Sunset in the mountains"
+            />
+  
+            <div class="px-6 py-10">
+              <div class="font-bold text-xl mb-2 mt-5">{{ data.name }}</div>
+              <p class="text-gray-700 text-base">
+                {{ data.name }}
+              </p>
+            </div>
+            <div>
+              <div class="-z-70 float-left">
+                &#8377;
+                {{
+                  data?.pizza_price + data.topping_price + data.cheese_price
+                }}*{{ data.count }}
+              </div>
+            </div>
+            <div class="px-6 pt-4 pb-2 mt-2">
+              <div class="width-5">Customise Comes Here</div>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div> -->
   </div>
 </div>
 
@@ -346,9 +296,12 @@
   class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
 >
   <div class="relative w-auto my-6 mx-auto max-w-3xl">
+    <!--content-->
     <div
       class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none overflow-y-scroll"
     >
+      <!--body-->
+
       <div class="bg-white-200">
         <div class="p-4 max-w-sm rounded overflow-hidden shadow-lg">
           <img
@@ -488,15 +441,15 @@
           Close
         </button>
         <!-- <button
-          class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          (click)="add2Cart(customizeData[0], 'add')"
-        >
-          Add Cart
-        </button> -->
+            class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            (click)="add2Cart(customizeData[0], 'add')"
+          >
+            Add Cart
+          </button> -->
 
         <div class="p-4 max-w-sm rounded">
-          <div class="-z-40 float-right" *ngIf="!customizeData[0].addToCart">
+          <div class="-z-40 float-right">
             <button
               type="button"
               class="bg-transparent text-blue-700 font-semibold py-2 px-4 border-2 border-cyan-900 rounded"
@@ -505,7 +458,7 @@
               Add To Cart
             </button>
           </div>
-          <div class="-z-40 float-right" *ngIf="customizeData[0].addToCart">
+          <!-- <div class="-z-40 float-right" *ngIf="customizeData[0].addToCart">
             <button
               type="button"
               class="bg-transparent text-blue-700 font-semibold py-2 px-4 border-2 border-cyan-900 rounded"
@@ -521,7 +474,7 @@
             >
               +
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
